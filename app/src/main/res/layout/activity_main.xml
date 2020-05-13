@@ -25,6 +25,7 @@
 
         <!-- Height Section-->
         <EditText
+            android:layout_margin="@dimen/margin_round"
             android:autofillHints="@string/height"
             android:inputType="number"
             android:layout_alignParentTop="true"
@@ -34,6 +35,7 @@
             android:hint="@string/height"/>
 
         <Spinner
+            android:layout_margin="@dimen/margin_round"
             android:id="@+id/spinnerHeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,6 +48,7 @@
 
         <!-- Weight Section-->
         <EditText
+            android:layout_margin="@dimen/margin_round"
             android:autofillHints="@string/weight"
             android:inputType="number"
             android:layout_width="wrap_content"
@@ -56,6 +59,7 @@
             />
 
         <Spinner
+            android:layout_margin="@dimen/margin_round"
             android:id="@+id/spinnerWeight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,11 +74,13 @@
 
     </RelativeLayout>
     <LinearLayout
+
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
+            android:layout_margin="@dimen/margin_round"
             android:id="@+id/btnCalculate"
             android:text="@string/calculate_bmi"
             android:layout_gravity="center_horizontal"
@@ -83,6 +89,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:layout_margin="@dimen/margin_round"
             android:id="@+id/textViewBMI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
