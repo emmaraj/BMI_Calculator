@@ -4,6 +4,7 @@
     <string name="height">Height</string>
     <string name="weight">Weight</string>
     <string name="defaultBMI">--</string>
+    <string name="calculate_bmi">Calculate BMI</string>
     <string-array name="height_measurements">
         <item>cm</item>
         <item>in</item>
