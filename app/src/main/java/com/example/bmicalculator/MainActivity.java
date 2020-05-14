@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner spinnerHeight, spinnerWeight;
     private EditText editTextHeight, editTextWeight;
-    private TextView textViewBMI;
+    private TextView textViewBMI, textViewClassification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         editTextHeight = findViewById(R.id.editTextHeight);
         editTextWeight = findViewById(R.id.editTextWeight);
         textViewBMI = findViewById(R.id.textViewBMI);
+        textViewClassification = findViewById(R.id.textViewClassification);
     }
 
     public void onClickCalculate(View view) {
@@ -41,19 +42,21 @@ public class MainActivity extends AppCompatActivity {
             double weight = Double.parseDouble(weightValue);
 
             if (isHeightValid(height) && isWeightValid(weight)) {
+
                 if (height_measure.equals("in")) {
                     height = convertInchesToMeters(height);
                 } else {
                     height = convertToMeters(height);
                 }
+
                 if (weight_measure.equals("lbs")) {
                     weight = convertToKilogram(weight);
                 }
-                //convert height into meters
 
                 double BMI = calculateBMI(weight, height);
+
                 textViewBMI.setText(format("%.2f", BMI));
-                
+                textViewClassification.setText(getClassification(BMI));
             } else if (!isWeightValid(height)) {
                 editTextHeight.setError("Kindly enter a valid Height");
             } else {
@@ -70,11 +73,6 @@ public class MainActivity extends AppCompatActivity {
     private double convertToMeters(double height) {
         return height / 100;
     }
-
-    /**
-     * @param inch Inputted Inch from the user
-     * @return int Centimeter equivalent of an inch value
-     */
 
     private double convertInchesToMeters(double inch) {
         return inch / 39.37;

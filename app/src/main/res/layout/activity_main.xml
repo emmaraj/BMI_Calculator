@@ -98,6 +98,16 @@
             android:text="@string/defaultBMI"
             android:textSize="30sp"
             tools:text="@string/age" />
+        <TextView
+            android:layout_margin="@dimen/margin_round"
+            android:id="@+id/textViewClassification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:layout_gravity="center_horizontal"
+            android:text="@null"
+            android:textSize="30sp"
+            tools:text="@string/age" />
     </LinearLayout>
 
 </LinearLayout>
