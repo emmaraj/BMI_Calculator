@@ -3,10 +3,13 @@ package com.example.bmicalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import static java.lang.String.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,12 +42,15 @@ public class MainActivity extends AppCompatActivity {
 
             if (isHeightValid(height) && isWeightValid(weight)){
                 if (height_measure.equals("in")) {
-                    height = convertToCentimeter(height);
+                    height = convertInchesToMeters(height);
+                } else{
+                    height = convertToMeters(height);
                 }
                 if (weight_measure.equals("lbs")) {
                     weight = convertToKilogram(weight);
                 }
-                textViewBMI.setText(String.valueOf(calculateBMI(weight, height)));
+                //convert height into meters
+                textViewBMI.setText(calculateBMI(weight, height));
             } else if (!isWeightValid(height)){
                 editTextHeight.setError("Kindly enter a valid Height");
             } else {
@@ -58,22 +64,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private double convertToMeters(double height) {
+        return height / 100;
+    }
+
     /**
      *
      * @param inch Inputted Inch from the user
      * @return int Centimeter equivalent of an inch value
      */
 
-    private double convertToCentimeter(double inch){
-        return inch / 2.54;
+    private double convertInchesToMeters(double inch){
+        return inch / 39.37;
     }
 
     private double convertToKilogram(double value){
         return value / 2.205;
     }
 
-    private double calculateBMI(double weight, double height) {
-        return (weight / Math.pow(height, 2));
+    private String calculateBMI(double weight, double height) {
+//        DecimalFormat format = new DecimalFormat("##.00");
+        double result = weight / Math.pow(height, 2);
+        Log.v("MyApp", "BMI: " + result);
+        return format("%.2f",result);
     }
 
     private boolean isHeightValid(double height){
