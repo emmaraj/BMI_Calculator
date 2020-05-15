@@ -2,13 +2,17 @@ package com.example.bmicalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import static com.example.bmicalculator.ContractClass.*;
 import static java.lang.String.*;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private Spinner spinnerHeight, spinnerWeight;
     private EditText editTextHeight, editTextWeight;
     private TextView textViewBMI, textViewClassification;
-
+    private double BMI, height, weight;
+    private long dateEntered;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         String weightValue = editTextWeight.getText().toString();
 
         if (heightValue.length() != 0 && weightValue.length() != 0) {
-            double height = Double.parseDouble(heightValue);
-            double weight = Double.parseDouble(weightValue);
+            height = Double.parseDouble(heightValue);
+            weight = Double.parseDouble(weightValue);
 
             if (isHeightValid(height) && isWeightValid(weight)) {
 
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     weight = convertToKilogram(weight);
                 }
 
-                double BMI = calculateBMI(weight, height);
+                BMI = calculateBMI(weight, height);
 
                 textViewBMI.setText(format("%.2f", BMI));
                 textViewClassification.setText(getClassification(BMI));
@@ -124,5 +129,17 @@ public class MainActivity extends AppCompatActivity {
             classification = "Obese Class III";
         }
         return classification;
+    }
+
+    private void saveNote() {
+        DBHelper databaseHelper = new DBHelper(this);
+        SQLiteDatabase database = databaseHelper.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DataEntry.COLUMN_DATE, dateEntered);
+        contentValues.put(DataEntry.COLUMN_INDEX, BMI);
+        contentValues.put(DataEntry.COLUMN_WEIGHT, weight);
+
+        database.insert(DataEntry.TABLE_NAME, null, contentValues);
     }
 }
