@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         if (heightValue.length() != 0 && weightValue.length() != 0) {
             height = Double.parseDouble(heightValue);
             weight = Double.parseDouble(weightValue);
-
+            
             if (isHeightValid(height) && isWeightValid(weight)) {
 
                 if (height_measure.equals("in")) {
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         return classification;
     }
 
-    private void saveNote() {
+    private void saveData() {
         DBHelper databaseHelper = new DBHelper(this);
         SQLiteDatabase database = databaseHelper.getWritableDatabase();
 

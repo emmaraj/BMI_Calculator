@@ -9,7 +9,7 @@ public class DataManager {
 
     //fetch all data
     public static ArrayList<BMI> fetchAllEntry(DBHelper helper) {
-        ArrayList<BMI> enteriesArrayList = new ArrayList<>();
+        ArrayList<BMI> entriesArrayList = new ArrayList<>();
         SQLiteDatabase database = helper.getWritableDatabase();
 
         String[] columns = {DataEntry.COLUMN_ID,
@@ -39,10 +39,10 @@ public class DataManager {
             double index = cursor.getDouble(positionIndex);
             long date = cursor.getLong(positionDateEntered);
 
-            enteriesArrayList.add(new BMI(ID, date, weight, index));
+            entriesArrayList.add(new BMI(ID, date, weight, index));
         }
         cursor.close();
-        return enteriesArrayList;
+        return entriesArrayList;
     }
 
     //save to db
